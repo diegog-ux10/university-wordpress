@@ -14,8 +14,8 @@
       <div class="site-header__menu group">
         <nav class="main-navigation">
           <ul class="min-list group">
-            <li <?php if(is_page('about-us') or wp_get_post_parent_id(0) == 13) echo 'class="current-menu-item"' ?>><a href="<?php echo site_url('/about-us') ?>">About Us</a></li>
-            <li <?php if(is_page('about-us') or wp_get_post_parent_id(0) == 13) echo 'class="current-menu-item"' ?>><a href="<?php echo site_url('/about-us') ?>"><a href="#">Programs</a></li>
+            <li <?php if(is_page('about') or wp_get_post_parent_id(0) == 5) echo 'class="current-menu-item"' ?>><a href="<?php echo site_url('/about') ?>">About Us</a></li>
+            <li <?php if(is_page('about') or wp_get_post_parent_id(0) == 5) echo 'class="current-menu-item"' ?>><a href="<?php echo site_url('/about') ?>"><a href="#">Programs</a></li>
             <li><a href="#">Events</a></li>
             <li><a href="#">Campuses</a></li>
             <li <?php if (get_post_type() == 'post') echo 'class="current-menu-item"' ?>><a href="<?php echo site_url('/blog') ?>">Blog</a></li>
