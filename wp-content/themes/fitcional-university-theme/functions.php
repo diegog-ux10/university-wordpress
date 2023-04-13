@@ -21,15 +21,5 @@ function university_features(): void
 
 add_action('after_setup_theme', 'university_features');
 
-function university_post_types(): void
-{
-     register_post_type('event', array(
-         'public' => true,
-         'labels' => array(
-             'name' => 'Events'
-         )
-     ));
-}
 
-add_action('init', 'university_post_types');
 
