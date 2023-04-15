@@ -18,8 +18,8 @@
                 <ul class="min-list group">
                     <li <?php if (is_page('about-us') or wp_get_post_parent_id(0) == 9) echo 'class="current-menu-item"' ?>>
                         <a href="<?php echo site_url('/about') ?>">About Us</a></li>
-                    <li <?php if (is_page('about') or wp_get_post_parent_id(0) == 5) echo 'class="current-menu-item"' ?>>
-                        <a href="<?php echo site_url('/about') ?>"><a href="#">Programs</a></li>
+                    <li <?php if (get_post_type() == 'programs')  echo 'class="current-menu-item"' ?>><a 
+                                href="<?php echo get_post_type_archive_link('program') ?>">Programs</a></li>
                     <li <?php if (get_post_type() == 'event') echo 'class="current-menu-item"' ?>><a
                                 href="<?php echo get_post_type_archive_link('event') ?>">Events</a></li>
                     <li><a href="#">Campuses</a></li>
