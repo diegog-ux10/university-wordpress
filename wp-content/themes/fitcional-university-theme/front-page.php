@@ -73,11 +73,15 @@
             <div class="full-width-split__inner">
                 <h2 class="headline headline--small-plus t-center">From Our Blogs</h2>
                 <?php
-                $newPosts = new WP_Query(array(
+                $newPosts = array(
                     'posts_per_page' => 2,
-                ));
-                while ($newPosts->have_posts()):
-                    $newPosts->the_post(); ?>
+                );
+
+                $blogPost = new Wp_query($newPosts);
+
+                
+                while ($blogPost->have_posts()):
+                    $blogPost->the_post(); ?>
                     <div class="event-summary">
                         <a class="event-summary__date event-summary__date--beige t-center" href="#">
                             <span class="event-summary__month"><?php the_time('M') ?></span>
