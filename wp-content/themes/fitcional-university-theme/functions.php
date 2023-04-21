@@ -14,9 +14,9 @@ add_action('wp_enqueue_scripts', 'university_files');
 function university_features(): void
 {
   add_theme_support('title-tag');
-  register_nav_menu('headerMenuLocation', 'Header Menu Location');
-  register_nav_menu('footerLocation1', 'Footer Location 1');
-  register_nav_menu('footerLocation2', 'Footer Location 2');
+  add_theme_support('post-thumbnails');
+  add_image_size('professorLandscape', 400, 260, true);
+  add_image_size('professorPortrait', 480, 650, true);
 }
 
 add_action('after_setup_theme', 'university_features');
