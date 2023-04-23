@@ -39,19 +39,10 @@ function university_post_types(): void
 
     ));
 
-<<<<<<< HEAD
-    // Programs Post Type
-
-    register_post_type('professor', array(
-        'supports' => array('title', 'editor', 'excerpt'),
-        'rewrite' => array('slug' => 'professors'),
-        'has_archive' => true,
-=======
-    // Profesor Post Type
+    // Professor Post Type
 
     register_post_type('professor', array(
         'supports' => array('title', 'editor', 'thumbnail'),
->>>>>>> 83194c7582e4c61c7b60325ba481ef3805a66974
         'public' => true,
         'show_in_rest' => true,
         'labels' => array(
