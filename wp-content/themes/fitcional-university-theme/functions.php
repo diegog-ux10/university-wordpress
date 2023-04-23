@@ -1,5 +1,7 @@
 <?php
 
+// Site's Scripts and Stylesheet's:
+
 function university_files(): void
 {
   wp_enqueue_script('main-university-js', get_theme_file_uri('/build/index.js'), array('jquery'), '1.0', true);
@@ -11,46 +13,58 @@ function university_files(): void
 
 add_action('wp_enqueue_scripts', 'university_files');
 
+// Site's Support add on
+
 function university_features(): void
 {
   add_theme_support('title-tag');
-  register_nav_menu('headerMenuLocation', 'Header Menu Location');
-  register_nav_menu('footerLocation1', 'Footer Location 1');
-  register_nav_menu('footerLocation2', 'Footer Location 2');
+  add_theme_support('post-thumbnails');
+  add_image_size('professorLandscape', 400, 260, true);
+  add_image_size('professorPortrait', 480, 650, true);
+  add_image_size('pageBanner', 1500, 350, true);
 }
 
 add_action('after_setup_theme', 'university_features');
 
+// Default's Queries Modifies
 
+function university_adjust_queries($query):void {
+  // New Setups for Event Query
 
-
-function university_adjust_queries($query){
-  if ( ! is_admin() && is_post_type_archive() && $query->is_main_query() ) {
-      
-   
-    
-
-    if (is_post_type_archive('event')) { 
-       $query->set( 'posts_per_page', -1 );
-       $query->set( 'post_type' , 'event' );
-       $query->set( 'meta_key', 'event-date' );
-       $query->set( 'order_by', 'meta_value_num' );
-       $query->set( 'order', 'ASC');
-       $query->set( 'meta_query', array(
-           array(
-               'key'     => 'event-date',
-               'compare' => '>=',
-               'value'   => date('Ymd'),
-               'type'    => 'numeric',
-           )
-       ) );
- 
-      }        
+  if (!is_admin() AND is_post_type_archive('event') AND $query->is_main_query()) {
+    /**Store Today's Date in a variable */
+    $today = date('Ymd');
+    /**Setup default query
+     * filter to show only
+     * upcoming events
+     */
+    $query->set('meta_key', 'event-date');
+    $query->set('order_by', 'meta_value_num');
+    $query->set('order', 'ASC');
+    $query->set('meta_query', array(
+      array(
+          'key' => 'event-date',
+          'compare' => '>=',
+          'value' => $today,
+          'type' => 'numeric'
+      )
+  ));
   }
- 
+
+  // New Setups for Program Query
+
+  if(!is_admin() AND is_post_type_archive('program') AND $query->is_main_query()) {
+    /**Setup Query to change
+     * his order by title
+     */
+    $query->set('order_by', 'title');
+    $query->set('order', 'ASC');
+    $query->set('posts_per_page', -1);
+  }
 }
 add_action( 'pre_get_posts', 'university_adjust_queries' );
-//
+
+
 
 
 $defaults = array (
