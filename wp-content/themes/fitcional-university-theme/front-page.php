@@ -18,40 +18,28 @@
             <div class="full-width-split__inner">
                 <h2 class="headline headline--small-plus t-center">Upcoming Events</h2>
                 <?php
-                    $today = date('Ymd');
-                    
-                    $homepageEvents = array(
-                        'posts_per_page' => 2,
-                        'post_type' => 'event',
-                        'meta_key' => 'event-date',
-                        'order_by' => 'meta_value_num',
-                        'order'    => 'ASC',
-                        'meta_query' => array(
-                            array( 
+                $today = date('Ymd');
+                $homepageEvents = new WP_Query(array(
+                    'posts_per_page' => 2,
+                    'post_type' => 'event',
+                    'meta_key' => 'event-date',
+                    'order_by' => 'meta_value_num',
+                    'order' => 'ASC',
+                    'meta_query' => array(
+                        array(
                             'key' => 'event-date',
                             'compare' => '>=',
                             'value' => $today,
-                            'type' => 'numeric',
-                            )
-
+                            'type' => 'numeric'
                         )
-                    );
-
-                    $eventoshome1 = new Wp_query($homepageEvents);
-                    
-
-                    while ($eventoshome1->have_posts()) {
-                        $eventoshome1->the_post(); ?>
+                    )
+                ));
+                while ($homepageEvents->have_posts()) {
+                    $homepageEvents->the_post(); ?>
                     <div class="event-summary">
                         <a class="event-summary__date t-center" href="#">
                         <?php $eventDate = new DateTime(get_field('event-date'));?>
                             <span class="event-summary__month"><?php echo $eventDate->format('M') ?></span>
-                            
-                            <span class="event-summary__month">
-                                <?php $eventDate = new DateTime(get_field('event-date'));
-                                echo $eventDate->format('M')?>
-                            </span>
-                            
                             <span class="event-summary__day"><?php echo $eventDate->format('d') ?></span>
                         </a>
                         <div class="event-summary__content">
@@ -77,15 +65,11 @@
             <div class="full-width-split__inner">
                 <h2 class="headline headline--small-plus t-center">From Our Blogs</h2>
                 <?php
-                $newPosts = array(
+                $newPosts = new WP_Query(array(
                     'posts_per_page' => 2,
-                );
-
-                $blogPost = new Wp_query($newPosts);
-
-                
-                while ($blogPost->have_posts()):
-                    $blogPost->the_post(); ?>
+                ));
+                while ($newPosts->have_posts()):
+                    $newPosts->the_post(); ?>
                     <div class="event-summary">
                         <a class="event-summary__date event-summary__date--beige t-center" href="#">
                             <span class="event-summary__month"><?php the_time('M') ?></span>

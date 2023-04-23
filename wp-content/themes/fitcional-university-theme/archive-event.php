@@ -38,22 +38,4 @@
         <p>Looking for a recap of past events? <a href="<?php echo site_url('/past-event') ?>">Check out past events</a></p>
     </div>
 
-                        <a class="event-summary__date t-center" href="#">
-                            <span class="event-summary__month"><?php $eventDate = new DateTime(get_field('event-date'));
-                                echo $eventDate->format('M')?></span>
-                            <span class="event-summary__day"><?php echo $eventDate->format('d') ?></span>
-                            
-                        </a>
-                        
-                        <div class="event-summary__content">
-                            
-                            <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h5>
-                            
-                            <p><?php wp_trim_words(get_the_content(), 18) ?><a href="<?php the_permalink() ?>" class="nu gray">Learn more</a></p>
-                        
-                        </div>
-                    
-                </div>    
-    </div>
-    <p class="t-center no-margin"><a href="<<?php echo site_url('/past-events') ?>; ?>"  class="btn btn--blue">View All Past Events</a></p>
 <?php get_footer(); ?>
