@@ -1,3 +1,4 @@
+<!-- Site Header -->
 <?php get_header(); ?>
     <div class="page-banner">
         <div class="page-banner__bg-image"

@@ -1,6 +1,5 @@
-<?php
-
-get_header();
+<!-- Site Header -->
+<?php get_header();
 
 while (have_posts()) {
     the_post(); ?>
@@ -27,7 +26,4 @@ while (have_posts()) {
         <div class="generic-content"><?php the_content() ?></div>
     </div>
 <?php }
-
-get_footer();
-
-?>
+get_footer();?>
