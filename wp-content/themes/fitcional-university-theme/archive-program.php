@@ -10,7 +10,27 @@
         </div>
     </div>
 
+    <div class="container container--narrow page-section">
+        <?php
+        
+            while (have_posts()):the_post(); ?>
+                
+                <div class="program-summary">
 
+                        <ul>
+                        <li> <h5><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h5></li>
+
+
+
+
+
+                        </ul>
+                    
+                </div>
+                
+        <?php endwhile; echo paginate_links(); ?>
+    
+    </div>
 
 
 
