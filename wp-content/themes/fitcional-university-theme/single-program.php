@@ -6,17 +6,11 @@
 while (have_posts()):
     the_post();
     ?>
-
-    <div class="page-banner">
-        <div class="page-banner__bg-image"
-                style="background-image: url(<?php echo get_theme_file_uri('/images/ocean.jpg') ?>);"></div>
-        <div class="page-banner__content container container--narrow">
-            <h1 class="page-banner__title"><?php the_title(); ?></h1>
-            <div class="page-banner__intro">
-                <p>DONT FORGET TO REPLACE ME LATER</p>
-            </div>
-        </div>
-    </div>
+    <!-- Page Banner -->
+    <?php get_template_part('template-parts/content', 'page-banner', array(
+        'title' => '',
+        'subtitle' => ''
+    ))?><!-- Page Banner End-->
 
     <div class="container container--narrow page-section">
         <div class="metabox metabox--position-up metabox--with-home-link">
@@ -28,21 +22,27 @@ while (have_posts()):
         </div>
 
         <div class="generic-content"><?php the_content() ?></div>
-
-        <?php $relatedProfessor = new WP_Query(array(
-                'posts_per_page' => -1,
-                'post_type' => 'professor',
-                'order_by' => 'meta_value_num',
-                'order' => 'ASC',
-                'meta_query' => array(
-                    array(
-                     'key' => 'related_programs',
-                     'compare' => 'LIKE',
-                     'value' => '"'. get_the_ID() .'"',
-                    )
+        
+        <?php 
+        /**Query to get:
+         * All related Professors
+         */
+        $relatedProfessor = new WP_Query(array(
+            'posts_per_page' => -1,
+            'post_type' => 'professor',
+            'order_by' => 'meta_value_num',
+            'order' => 'ASC',
+            'meta_query' => array(
+                array(
+                    'key' => 'related_programs',
+                    'compare' => 'LIKE',
+                    'value' => '"'. get_the_ID() .'"',
                 )
-                ));
-            
+            )
+        ));
+        /**Check if there is Professors
+         * to show section 
+         */        
         if($relatedProfessor): ?>
             <hr class="section-break">
             <h2 class="headline headline--medium"><?php the_title() ?> Professors</h2>
@@ -97,7 +97,7 @@ while (have_posts()):
         endif;
         ?>
     </div>
-    
+
 <?php
 endwhile;/**Main Loop End*/
 get_footer(); ?>
