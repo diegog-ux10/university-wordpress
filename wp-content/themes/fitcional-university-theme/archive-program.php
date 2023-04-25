@@ -14,53 +14,6 @@
 </div><!-- Page Banner End-->
 
     <div class="container container--narrow page-section">
-<<<<<<< HEAD
-        <?php
-        
-            while (have_posts()):the_post(); ?>
-                
-                <div class="program-summary">
-
-                        <ul>
-                        <li> <h5><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h5></li>
-
-
-
-
-
-                        </ul>
-                    
-                </div>
-                
-        <?php endwhile; echo paginate_links(); ?>
-    
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
         <ul class="link-list min-list">
 
             <?php
@@ -74,5 +27,4 @@
         <?php
         echo paginate_links();
         ?>
->>>>>>> 503726032e1ae41bc7bf019698ccaf313e4af02c
 <?php get_footer(); ?>
