@@ -63,36 +63,3 @@ function university_adjust_queries($query):void {
   }
 }
 add_action( 'pre_get_posts', 'university_adjust_queries' );
-
-
-
-
-$defaults = array (
-	'default_color'					=> 'ffffff',
-	'default-repeat'				=> 'no-repeat',
-	'default-position-x'			=> 'center',
-	'default-attachment'			=> 'fixed'
-
-);
-
-add_theme_support( 'custom-backgrond', $defaults );
-
-// ADD SUPPORT FOR RESPNSIVE EMBEDDED CONTENT
-add_theme_support('responsive-embeds');
-
-// ADD THUMBNAIL TO POST THEME
-add_theme_support('post-thumbnails');
-add_image_size( 'post-tumb', 320, 190, true );
-add_image_size( 'blog-thumb', 370, 250, true );
-
-if(function_exists('acf_add_options_page')){
-	acf_add_options_page(array(
-		'page_title' => 'SITE_NAME',
-		'menu_title' => 'SITE_NAME',
-		'menu_slug'  => 'site_name',
-		'capability' => 'manage_options',
-		'post_id'    => 'options',
-		'position'   => 3,
-		'redirect'	 => false
-	));
-}
