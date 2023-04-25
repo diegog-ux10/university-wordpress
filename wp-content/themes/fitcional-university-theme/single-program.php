@@ -1,11 +1,15 @@
 <!-- Site Header -->
 <?php get_header();
+/**
+ * Main Loop
+ */
 while (have_posts()):
     the_post();
     ?>
+
     <div class="page-banner">
         <div class="page-banner__bg-image"
-             style="background-image: url(<?php echo get_theme_file_uri('/images/ocean.jpg') ?>);"></div>
+                style="background-image: url(<?php echo get_theme_file_uri('/images/ocean.jpg') ?>);"></div>
         <div class="page-banner__content container container--narrow">
             <h1 class="page-banner__title"><?php the_title(); ?></h1>
             <div class="page-banner__intro">
@@ -22,7 +26,9 @@ while (have_posts()):
                 </a><span class="metabox__main"><?php the_title() ?></span>
             </p>
         </div>
+
         <div class="generic-content"><?php the_content() ?></div>
+
         <?php $relatedProfessor = new WP_Query(array(
                 'posts_per_page' => -1,
                 'post_type' => 'professor',
@@ -56,6 +62,7 @@ while (have_posts()):
             </ul>
         <?php wp_reset_postdata();
         endif;
+
         $today = date('Ymd');
         $relatedEvents = new WP_Query(array(
             'posts_per_page' => 10,
@@ -83,30 +90,14 @@ while (have_posts()):
         <h2 class="headline headline--medium">Upcoming <?php the_title() ?> Events</h2>
         <?php
             while ($relatedEvents->have_posts()):
-                $relatedEvents->the_post(); ?>
-                <div class="event-summary">
-                    <a class="event-summary__date t-center" href="#">
-                    <?php $eventDate = new DateTime(get_field('event-date'));?>
-                        <span class="event-summary__month"><?php echo $eventDate->format('M') ?></span>
-                        <span class="event-summary__day"><?php echo $eventDate->format('d') ?></span>
-                    </a>
-                    <div class="event-summary__content">
-                        <h5 class="event-summary__title headline headline--tiny"><a
-                                    href="<?php the_permalink() ?>"><?php the_title() ?></a></h5>
-                        <p><?php if (has_excerpt()):
-                                echo get_the_excerpt();
-                            else:
-                                echo wp_trim_words(get_the_content(), 18);
-                            endif;
-                            ?><a href="<?php the_permalink() ?>" class="nu gray">Learn more</a></p>
-                    </div>
-                </div>
-                <?php
+                $relatedEvents->the_post();
+                get_template_part('template-parts/content', 'event');
             endwhile;
             wp_reset_postdata();
         endif;
         ?>
     </div>
+    
 <?php
-endwhile;
+endwhile;/**Main Loop End*/
 get_footer(); ?>
