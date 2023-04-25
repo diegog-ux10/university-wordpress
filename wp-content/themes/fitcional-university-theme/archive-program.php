@@ -7,7 +7,6 @@
         'subtitle' => "See what's going on in out world."
 ))?><!-- Page Banner End-->
 
-
     <div class="container container--narrow page-section">
         <ul class="link-list min-list">
 

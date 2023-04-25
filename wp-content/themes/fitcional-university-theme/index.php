@@ -1,10 +1,11 @@
 <!-- Site Header -->
 <?php get_header(); ?>
+
 <!-- Page Banner -->
 <?php get_template_part('template-parts/content', 'page-banner', array(
         'title' => get_the_title(),
         'subtitle' => ''
-    ))?><!-- Page Banner End-->
+))?><!-- Page Banner End-->
 
     <div class="container container--narrow page-section">
         <?php

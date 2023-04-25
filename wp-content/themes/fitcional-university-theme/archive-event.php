@@ -5,7 +5,7 @@
 <?php get_template_part('template-parts/content', 'page-banner', array(
         'title' => 'All Events',
         'subtitle' => "See what's going on in out world."
-    ))?><!-- Page Banner End-->
+))?><!-- Page Banner End-->
 
 <div class="container container--narrow page-section">
     <?php

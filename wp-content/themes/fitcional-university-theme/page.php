@@ -3,13 +3,14 @@
 <!-- Site Header -->
 <?php get_header();
 
-  while(have_posts()) {
-    the_post(); ?>
+while(have_posts()):
+  the_post(); ?>
+    
   <!-- Page Banner -->
   <?php get_template_part('template-parts/content', 'page-banner', array(
         'title' => '',
         'subtitle' => ''
-    ))?><!-- Page Banner End-->
+  ))?><!-- Page Banner End-->
 
   <div class="container container--narrow page-section">
     <?php if($the_parent): ?>
@@ -39,22 +40,19 @@
             'child_of' => $find_children_of,
             'sort_column' => 'menu_order'
           )); 
-         ?>
+          ?>
         <!-- <li class="current_page_item"><a href="#">Our History</a></li>
         <li><a href="#">Our Goals</a></li> -->
       </ul>
     </div>
     <?php endif; ?>
-   
+    
 
     <div class="generic-content">
       <?php the_content(); ?>
     </div>
 
   </div>
-    
-  <?php }
-
-  get_footer();
-
-?>
+<?php 
+endwhile;
+get_footer();?>
