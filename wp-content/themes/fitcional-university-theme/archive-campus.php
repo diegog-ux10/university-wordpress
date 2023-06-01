@@ -36,7 +36,7 @@
                 let locations = <?php echo json_encode($locationArr) ?>
 
                 marker.setLngLat(['-118.21916900979939', '34.00289791124215'])
-                .addTo(map);
+                .addTo(map);    
             </script>
         </div>
         <?php echo paginate_links(); ?>
