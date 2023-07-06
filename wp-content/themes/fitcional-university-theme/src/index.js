@@ -1,11 +1,13 @@
-import "../css/style.scss"
+import "../css/style.scss";
 
 // Our modules / classes
-import MobileMenu from "./modules/MobileMenu"
-import HeroSlider from "./modules/HeroSlider"
-import Search from "./modules/Search"
+import MobileMenu from "./modules/MobileMenu";
+import HeroSlider from "./modules/HeroSlider";
+import Search from "./modules/Search";
+import GoogleMap from "./modules/GoogleMaps";
 
 // Instantiate a new object using our modules/classes
-var mobileMenu = new MobileMenu()
-var heroSlider = new HeroSlider()
-var search = new Search()
+const mobileMenu = new MobileMenu();
+const heroSlider = new HeroSlider();
+const search = new Search();
+const googleMap = new GoogleMap();
