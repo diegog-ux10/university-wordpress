@@ -36,33 +36,33 @@ while (have_posts()):
         /**Query to get:
          * All related Professors
          */
-        $relatedProfessor = new WP_Query(array(
+        $relatedPrograms = new WP_Query(array(
             'posts_per_page' => -1,
-            'post_type' => 'professor',
+            'post_type' => 'program',
             'order_by' => 'meta_value_num',
             'order' => 'ASC',
             'meta_query' => array(
                 array(
-                    'key' => 'related_programs',
+                    'key' => 'related_campuses',
                     'compare' => 'LIKE',
                     'value' => '"'. get_the_ID() .'"',
                 )
             )
         ));
+
         /**Check if there is Professors
          * to show section 
          */        
-        if($relatedProfessor): ?>
+        if($relatedPrograms): ?>
     <hr class="section-break">
-    <h2 class="headline headline--medium"><?php the_title() ?> Professors</h2>
-    <ul class="professor-cards">
+    <h2 class="headline headline--medium">Programs Available at this campus</h2>
+    <ul class="min-list link-list">
         <?php
-            while ($relatedProfessor->have_posts()):
-                $relatedProfessor->the_post(); ?>
-        <li class="professor-card__list-item">
-            <a class="professor-card" href="<?php the_permalink() ?>">
-                <img src="<?php  the_post_thumbnail_url('professorLandscape') ?>" alt="" class="professor-card__image">
-                <span class="professor-card__name"><?php the_title() ?></span>
+            while ($relatedPrograms->have_posts()):
+                $relatedPrograms->the_post(); ?>
+        <li>
+            <a href="<?php the_permalink() ?>">
+                <?php the_title() ?>
             </a>
         </li>
 
@@ -70,41 +70,7 @@ while (have_posts()):
             endwhile; ?>
     </ul>
     <?php wp_reset_postdata();
-        endif;
-
-        $today = date('Ymd');
-        $relatedEvents = new WP_Query(array(
-            'posts_per_page' => 10,
-            'post_type' => 'event',
-            'meta_key' => 'event-date',
-            'order_by' => 'meta_value_num',
-            'order' => 'ASC',
-            'meta_query' => array(
-                array(
-                    'key' => 'event-date',
-                    'compare' => '>=',
-                    'value' => $today,
-                    'type' => 'numeric'
-                ),
-                array(
-                 'key' => 'related_programs',
-                 'compare' => 'LIKE',
-                 'value' => '"'. get_the_ID() .'"',
-                )
-            )
-            ));
-
-        if($relatedEvents): ?>
-    <hr class="section-break">
-    <h2 class="headline headline--medium">Upcoming <?php the_title() ?> Events</h2>
-    <?php
-            while ($relatedEvents->have_posts()):
-                $relatedEvents->the_post();
-                get_template_part('template-parts/content', 'event');
-            endwhile;
-            wp_reset_postdata();
-        endif;
-        ?>
+        endif; ?>
 </div>
 
 <?php
