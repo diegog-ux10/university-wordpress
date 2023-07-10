@@ -201,6 +201,7 @@ class Search {
     this.searchField.on("keydown", this.typingLodic.bind(this));
   }
   typingLodic() {
+    clearTimeout(this.t);
     this.TypingTimer = setTimeout(function () {}, 2000);
   }
   keyPressDispatcher(event) {
