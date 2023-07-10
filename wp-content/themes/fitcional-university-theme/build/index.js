@@ -192,6 +192,7 @@ class Search {
     this.searchField = jquery__WEBPACK_IMPORTED_MODULE_0___default()("#search-term");
     this.events();
     this.isOverlayIsOpen = false;
+    this.TypingTimer;
   }
   events() {
     this.openButton.on("click", this.openOverlay.bind(this));
@@ -200,7 +201,7 @@ class Search {
     this.searchField.on("keydown", this.typingLodic.bind(this));
   }
   typingLodic() {
-    setTimeout(function () {}, 2000);
+    this.TypingTimer = setTimeout(function () {}, 2000);
   }
   keyPressDispatcher(event) {
     if (event.keyCode == 83 && this.isOverlayIsOpen == false) {

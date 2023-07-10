@@ -8,6 +8,7 @@ class Search {
     this.searchField = $("#search-term");
     this.events();
     this.isOverlayIsOpen = false;
+    this.TypingTimer;
   }
 
   events() {
@@ -18,7 +19,8 @@ class Search {
   }
 
   typingLodic() {
-    setTimeout(function () {}, 2000);
+    clearTimeout(this.t);
+    this.TypingTimer = setTimeout(function () {}, 2000);
   }
 
   keyPressDispatcher(event) {
