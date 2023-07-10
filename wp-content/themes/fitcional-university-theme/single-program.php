@@ -6,24 +6,25 @@
 while (have_posts()):
     the_post();
     ?>
-    <!-- Page Banner -->
-    <?php get_template_part('template-parts/content', 'page-banner', array(
+<!-- Page Banner -->
+<?php get_template_part('template-parts/content', 'page-banner', array(
         'title' => '',
         'subtitle' => ''
-    ))?><!-- Page Banner End-->
+    ))?>
+<!-- Page Banner End-->
 
-    <div class="container container--narrow page-section">
-        <div class="metabox metabox--position-up metabox--with-home-link">
-            <p>
-                <a class="metabox__blog-home-link" href="<?php echo get_post_type_archive_link('program'); ?>">
-                    <i class="fa fa-home" aria-hidden="true"></i>All Programs
-                </a><span class="metabox__main"><?php the_title() ?></span>
-            </p>
-        </div>
+<div class="container container--narrow page-section">
+    <div class="metabox metabox--position-up metabox--with-home-link">
+        <p>
+            <a class="metabox__blog-home-link" href="<?php echo get_post_type_archive_link('program'); ?>">
+                <i class="fa fa-home" aria-hidden="true"></i>All Programs
+            </a><span class="metabox__main"><?php the_title() ?></span>
+        </p>
+    </div>
 
-        <div class="generic-content"><?php the_content() ?></div>
-        
-        <?php 
+    <div class="generic-content"><?php the_content() ?></div>
+
+    <?php 
         /**Query to get:
          * All related Professors
          */
@@ -44,23 +45,23 @@ while (have_posts()):
          * to show section 
          */        
         if($relatedProfessor): ?>
-            <hr class="section-break">
-            <h2 class="headline headline--medium"><?php the_title() ?> Professors</h2>
-            <ul class="professor-cards">
+    <hr class="section-break">
+    <h2 class="headline headline--medium"><?php the_title() ?> Professors</h2>
+    <ul class="professor-cards">
         <?php
             while ($relatedProfessor->have_posts()):
                 $relatedProfessor->the_post(); ?>
-                <li class="professor-card__list-item">   
-                    <a  class="professor-card" href="<?php the_permalink() ?>">
-                        <img src="<?php  the_post_thumbnail_url('professorLandscape') ?>" alt="" class="professor-card__image">
-                        <span class="professor-card__name"><?php the_title() ?></span>
-                    </a>
-                </li>
+        <li class="professor-card__list-item">
+            <a class="professor-card" href="<?php the_permalink() ?>">
+                <img src="<?php  the_post_thumbnail_url('professorLandscape') ?>" alt="" class="professor-card__image">
+                <span class="professor-card__name"><?php the_title() ?></span>
+            </a>
+        </li>
 
-                <?php
+        <?php
             endwhile; ?>
-            </ul>
-        <?php wp_reset_postdata();
+    </ul>
+    <?php wp_reset_postdata();
         endif;
 
         $today = date('Ymd');
@@ -86,17 +87,25 @@ while (have_posts()):
             ));
 
         if($relatedEvents): ?>
-        <hr class="section-break">
-        <h2 class="headline headline--medium">Upcoming <?php the_title() ?> Events</h2>
-        <?php
+    <hr class="section-break">
+    <?php
             while ($relatedEvents->have_posts()):
                 $relatedEvents->the_post();
                 get_template_part('template-parts/content', 'event');
             endwhile;
             wp_reset_postdata();
         endif;
+        $relatedCampuses = get_field('related_campuses');
+        if($relatedCampuses) {
+            echo '<h2 class="headline headline--medium">'. get_the_title() .' is Available at this Campus</h2>';
+            echo '<ul class="min-list link-list">';
+            foreach($relatedCampuses as $campus) {
+                ?> <li><a href="<?php get_the_permalink($campus); ?>"><?php echo get_the_title($campus) ?></a></li> <?php
+            }
+            echo '</ul>';
+        }
         ?>
-    </div>
+</div>
 
 <?php
 endwhile;/**Main Loop End*/
