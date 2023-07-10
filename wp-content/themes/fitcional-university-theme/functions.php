@@ -62,6 +62,15 @@ function university_adjust_queries($query):void {
     $query->set('order', 'ASC');
     $query->set('posts_per_page', -1);
   }
+
+  // New Swtups for Campus Query
+  
+   if(!is_admin() AND is_post_type_archive('campus') AND $query->is_main_query()) {
+    /**Setup Query to change
+     * his order by title
+     */
+    $query->set('posts_per_page', -1);
+  }
 }
 
 add_action( 'pre_get_posts', 'university_adjust_queries' );
