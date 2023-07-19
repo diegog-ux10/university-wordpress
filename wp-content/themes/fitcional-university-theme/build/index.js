@@ -186,6 +186,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class Search {
   constructor() {
+    this.addSearchHtml();
     this.resultsDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()("#search-overlay__results");
     this.openButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".js-search-trigger");
     this.closeButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".search-overlay__close");
@@ -211,7 +212,7 @@ class Search {
           this.resultsDiv.html('<div class="spinner-loader"></div>');
           this.isSpinnerVisible = true;
         }
-        this.typingTimer = setTimeout(this.getResults.bind(this), 2000);
+        this.typingTimer = setTimeout(this.getResults.bind(this), 750);
       } else {
         this.resultsDiv.html("");
         this.isSpinnerVisible = false;
@@ -220,8 +221,18 @@ class Search {
     this.previousValue = this.searchField.val();
   }
   getResults() {
-    this.resultsDiv.html("Results");
-    this.isSpinnerVisible = false;
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().when(jquery__WEBPACK_IMPORTED_MODULE_0___default().getJSON(`${universityData.root_url}/wp-json/wp/v2/posts?search=${this.searchField.val()}`), jquery__WEBPACK_IMPORTED_MODULE_0___default().getJSON(`${universityData.root_url}/wp-json/wp/v2/pages?search=${this.searchField.val()}`)).then((posts, pages) => {
+      var combineResults = posts[0].concat(pages[0]);
+      this.resultsDiv.html(`
+          <h2 class="search-overlay_section-title">General</h2>
+          ${combineResults.length ? '<ul class="link-list min-list">' : "<p>No matching Results</p>"}
+            ${combineResults.map(searchResult => `<li><a href="${searchResult.link}">${searchResult.title.rendered}</a></li>`)}
+          ${combineResults.length ? "</ul>" : ""}
+        `);
+      this.isSpinnerVisible = false;
+    }, error => {
+      this.resultsDiv.html("<p>Unexpected error; please try again</p>");
+    });
   }
   keyPressDispatcher(event) {
     if (event.keyCode == 83 && !this.isOverlayIsOpen && !jquery__WEBPACK_IMPORTED_MODULE_0___default()("input, textarea").is(":focus")) {
@@ -234,12 +245,33 @@ class Search {
   openOverlay() {
     this.searchOverlay.addClass("search-overlay--active");
     jquery__WEBPACK_IMPORTED_MODULE_0___default()("body").addClass("body-no-scroll");
+    setTimeout(() => this.searchField.focus(), 301);
+    this.searchField.val("");
     this.isOverlayIsOpen = true;
   }
   closeOverlay() {
     this.searchOverlay.removeClass("search-overlay--active");
     jquery__WEBPACK_IMPORTED_MODULE_0___default()("body").removeClass("body-no-scroll");
     this.isOverlayIsOpen = false;
+  }
+  addSearchHtml() {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("body").append(`
+    <div class="search-overlay">
+      <div class="seach-overlay__top">
+        <div class="container">
+            <i class="fa fa-search search-overlay__icon" aria-hidden="true"></i>
+            <input autocomplete="off" type="text" class="search-term" placeholder="What are you looking for?"
+                id="search-term">
+            <i class="fa fa-window-close search-overlay__close" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="container">
+        <div id="search-overlay__results">
+
+        </div>
+      </div>
+    </div>
+    `);
   }
 }
 /* harmony default export */ __webpack_exports__["default"] = (Search);
