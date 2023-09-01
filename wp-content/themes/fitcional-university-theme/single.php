@@ -1,19 +1,13 @@
-<?php
-
-get_header();
+<!-- Site Header -->
+<?php get_header();
 
 while (have_posts()) {
     the_post(); ?>
-    <div class="page-banner">
-        <div class="page-banner__bg-image"
-             style="background-image: url(<?php echo get_theme_file_uri('/images/ocean.jpg') ?>);"></div>
-        <div class="page-banner__content container container--narrow">
-            <h1 class="page-banner__title"><?php the_title(); ?></h1>
-            <div class="page-banner__intro">
-                <p>DONT FORGET TO REPLACE ME LATER</p>
-            </div>
-        </div>
-    </div>
+    <!-- Page Banner -->
+    <?php get_template_part('template-parts/content', 'page-banner', array(
+        'title' => '',
+        'subtitle' => ''
+    ))?><!-- Page Banner End-->
 
     <div class="container container--narrow page-section">
         <div class="metabox metabox--position-up metabox--with-home-link">
@@ -26,8 +20,14 @@ while (have_posts()) {
         </div>
         <div class="generic-content"><?php the_content() ?></div>
     </div>
+
+  <strong><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum 
+        has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has surv
+        ived not only five centuries, but also the leap into electronic typesetting, remaining essentially
+         unchanged. It was popularised in the 1960s with the release of Letraset sheets containing 
+         Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker i
+         ncluding versions of Lorem Ipsum.</p></strong>
+
+
 <?php }
-
-get_footer();
-
-?>
+get_footer();?>

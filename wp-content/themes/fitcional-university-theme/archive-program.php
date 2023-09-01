@@ -1,27 +1,24 @@
+<!-- Site Header -->
 <?php get_header(); ?>
-    <div class="page-banner">
-        <div class="page-banner__bg-image"
-             style="background-image: url(<?php echo get_theme_file_uri('/images/ocean.jpg') ?>);"></div>
-        <div class="page-banner__content container container--narrow">
-            <h1 class="page-banner__title">All Programs</h1>
-            <div class="page-banner__intro">
-                <p>See what's going on in out world.</p>
-            </div>
-        </div>
-    </div>
 
+<!-- Page Banner -->
+<?php get_template_part('template-parts/content', 'page-banner', array(
+        'title' => 'All Programs',
+        'subtitle' => "See what's going on in out world."
+))?><!-- Page Banner End-->
+
+    <!-- Container to show all programs -->
     <div class="container container--narrow page-section">
         <ul class="link-list min-list">
-
-            <?php
+        <?php
+        /**
+         * Loop Show Programs
+         */
         while (have_posts()):
             the_post(); ?>
                 <li><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></li>    
-            <?php
-        endwhile;
-        ?>
+        <?php endwhile; ?>
         </ul>
-        <?php
-        echo paginate_links();
-        ?>
+        <?php echo paginate_links(); ?>
+    </div><!-- Container to show all programs End-->
 <?php get_footer(); ?>
